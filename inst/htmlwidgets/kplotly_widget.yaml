@@ -1,0 +1,8 @@
+# plotly.js is embedded: the "cartesian" bundle (scatter, bar, box,
+# histogram, heatmap, contour, violin, pie...), lighter than the full bundle.
+# See inst/htmlwidgets/lib/plotly-<version>/LICENSE (MIT).
+dependencies:
+  - name: plotly.js-cartesian
+    version: 4.1.2
+    src: htmlwidgets/lib/plotly-4.1.2
+    script: plotly-cartesian.min.js

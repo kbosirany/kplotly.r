@@ -1,0 +1,9 @@
+.Rproj.user
+docs
+.Rhistory
+.RData
+.httr-oauth
+.DS_Store
+.quarto
+inst/doc
+.claude/settings.local.json
