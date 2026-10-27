@@ -1,0 +1,99 @@
+# kplotly.r
+
+Site: <https://kbosirany.github.io/kplotly.r/> (development version:
+[/dev](https://kbosirany.github.io/kplotly.r/dev/))
+
+An interactive plot with several series, a shared legend and a range
+slider quickly costs a dozen lines of `plot_ly()` / `add_trace()` /
+[`layout()`](https://rdrr.io/r/graphics/layout.html) calls and
+long-format bookkeeping. **kplotly.r** draws a complete interactive plot
+in one short call, and plots stay composable through the `kplotly` S3
+class. It is the plotly.js counterpart of
+[kggplot](https://github.com/kbosirany/kggplot), with the same
+arguments: changing `kggplot(` into `kplotly(` turns a static plot into
+an interactive one.
+
+plotly.js is embedded (the “cartesian” bundle): kplotly.r only depends
+on htmlwidgets, not on the plotly R package and its dependencies.
+
+## Installation
+
+``` r
+
+# install.packages("pak")
+pak::pak("kbosirany/kplotly.r")
+```
+
+## Example
+
+``` r
+
+library(kplotly.r)
+
+# A time series: several columns, a range slider and a unified hover
+weather <- data.frame(date = as.Date("2024-01-01") + 0:364)
+weather$rain <- rgamma(365, 0.4, 0.1)
+weather$temp <- 12 + 8 * sin(1:365 / 58 - 1.5)
+kplotly(weather, "date", c("rain", "temp"), title = "Weather")
+
+# kplot / TSstudio style calls
+kplotly(weather, vars = list(x = "date", y = "all"), type = "point")
+
+# Superpose layers: shared colours, one legend entry per level
+obs <- data.frame(t = 1:20, v = (1:20)^1.2 + rnorm(20))
+sim <- data.frame(t = 1:20, v = (1:20)^1.2)
+kplotly(obs, "t", "v", color = "Observed", type = "point", theme = "inrae") +
+  kplotly(sim, "t", "v", color = "Simulated", type = "line")
+
+# Any plotly.js layout attribute, and the htmlwidget for Shiny
+p <- kplotly(iris, "Sepal.Length", "Sepal.Width", color = "Species") |>
+  kply_layout(hovermode = "x")
+as_htmlwidget(p)
+```
+
+See
+[`vignette("kplotly")`](https://kbosirany.github.io/kplotly.r/dev/articles/kplotly.md)
+(“Get started”) for the full tour.
+
+Branch, version and release conventions are those of
+[kpkg.r](https://github.com/kbosirany/kpkg.r):
+`vignette("workflow", package = "kpkg.r")`.
+
+# Package index
+
+## All functions
+
+- [`as_htmlwidget()`](https://kbosirany.github.io/kplotly.r/dev/reference/as_htmlwidget.md)
+  : Convert to an htmlwidget
+- [`as_kdata()`](https://kbosirany.github.io/kplotly.r/dev/reference/as_kdata.md)
+  : Convert an input object to a data frame for kplotly
+- [`kplotly()`](https://kbosirany.github.io/kplotly.r/dev/reference/kplotly.md)
+  : Draw a complete interactive plot in one call
+- [`kply_add()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_labs()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_theme()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_palette()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_legend()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_slider()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_layout()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  [`kply_config()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_modify.md)
+  : Modify a kplotly
+- [`kply_register_theme()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_register_theme.md)
+  [`kply_register_palette()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_register_theme.md)
+  [`kply_themes()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_register_theme.md)
+  [`kply_palettes()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_register_theme.md)
+  : Themes and palettes
+- [`kply_register_type()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_register_type.md)
+  [`kply_types()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_register_type.md)
+  : Plot types
+- [`kply_save()`](https://kbosirany.github.io/kplotly.r/dev/reference/kply_save.md)
+  : Save a kplotly to an HTML file
+- [`` `+`( ``*`<kplotly>`*`)`](https://kbosirany.github.io/kplotly.r/dev/reference/plus-.kplotly.md)
+  : Add layers or widget steps to a kplotly
+
+# Articles
+
+### All vignettes
+
+- [Get started with
+  kplotly.r](https://kbosirany.github.io/kplotly.r/dev/articles/kplotly.md):
