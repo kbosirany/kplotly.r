@@ -100,7 +100,11 @@ kplotly(data, new_data = NULL, ...)
 - legend:
 
   `"right"`, `"bottom"`, `"top"`, `"left"`, `"none"`/`FALSE`, or
-  `c(x, y)` to place it inside the panel (fractions of the panel).
+  `c(x, y)` to place it inside the panel (fractions of the panel). At
+  the top and the bottom the legend is horizontal: the widget reserves a
+  margin for it, at most a quarter of the height of the figure, and a
+  longer legend scrolls. With dozens of levels, prefer `"right"`, or
+  colour by fewer levels.
 
 - slider:
 
