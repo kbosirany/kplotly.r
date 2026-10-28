@@ -53,7 +53,11 @@
 #'   colours), a palette name ([kply_palettes()]) or a function of `n`.
 #'   Default: the theme palette.
 #' @param legend `"right"`, `"bottom"`, `"top"`, `"left"`, `"none"`/`FALSE`,
-#'   or `c(x, y)` to place it inside the panel (fractions of the panel).
+#'   or `c(x, y)` to place it inside the panel (fractions of the panel). At
+#'   the top and the bottom the legend is horizontal: the widget reserves a
+#'   margin for it, at most a quarter of the height of the figure, and a
+#'   longer legend scrolls. With dozens of levels, prefer `"right"`, or
+#'   colour by fewer levels.
 #' @param slider Whether to add a range slider under the x axis. By default
 #'   `TRUE` for time series (`Date`/`POSIXct` `x`, `ts` input), `FALSE`
 #'   otherwise.

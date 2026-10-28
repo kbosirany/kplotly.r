@@ -200,8 +200,11 @@ build_layout <- function(x, res, theme_layout) {
 }
 
 # Position of the legend. At the top and the bottom, it is placed relative to
-# the whole figure (`"container"`), so it never covers the range slider; on
-# the left, beyond the y axis title, plotly.js widens the margin for it.
+# the whole figure (`"container"`), so it never covers the range slider. As
+# plotly.js reserves no margin for it, the widget measures it and widens the
+# margin (see kplotly_widget.js); `maxheight` (a fraction of the figure)
+# makes a very long legend scroll. On the left, beyond the y axis title,
+# plotly.js widens the margin for it.
 add_legend <- function(layout, legend, title) {
   if (isFALSE(legend) || identical(legend, "none")) {
     layout$showlegend <- FALSE
@@ -220,11 +223,11 @@ add_legend <- function(layout, legend, title) {
       left = list(x = -0.12, xanchor = "right", y = 1, yanchor = "top"),
       top = list(
         orientation = "h", xanchor = "center", x = 0.5,
-        yref = "container", y = 1, yanchor = "top"
+        yref = "container", y = 1, yanchor = "top", maxheight = 0.25
       ),
       bottom = list(
         orientation = "h", xanchor = "center", x = 0.5,
-        yref = "container", y = 0, yanchor = "bottom"
+        yref = "container", y = 0, yanchor = "bottom", maxheight = 0.25
       ),
       stop(
         "`legend` must be \"right\", \"bottom\", \"top\", \"left\", ",
