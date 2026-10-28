@@ -1,5 +1,11 @@
 # kplotly.r 0.0.0.9000
 
+* A horizontal legend (`legend = "bottom"` or `"top"`) no longer covers the
+  plot and the range slider when it has many entries: plotly.js reserves no
+  margin for a legend anchored to the figure, so the widget now measures it
+  and widens the margin on its side. A legend taller than a quarter of the
+  figure scrolls (`maxheight`).
+
 * First version: the plotly.js counterpart of kggplot, with the same
   arguments, so a call switches from a static to an interactive plot by
   changing the function name.

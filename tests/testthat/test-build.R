@@ -32,6 +32,10 @@ test_that("the legend can be moved or removed", {
   expect_false(leg(FALSE)$showlegend)
   expect_null(leg(NULL)$legend)
   expect_equal(leg("bottom")$legend$orientation, "h")
+  # a long horizontal legend scrolls instead of covering the plot
+  expect_equal(leg("bottom")$legend$maxheight, 0.25)
+  expect_equal(leg("top")$legend$maxheight, 0.25)
+  expect_null(leg("right")$legend$maxheight)
   expect_equal(leg("top")$legend$yanchor, "top")
   expect_equal(leg("left")$legend$xanchor, "right")
   expect_equal(leg(c(0.1, 0.9))$legend$x, 0.1)

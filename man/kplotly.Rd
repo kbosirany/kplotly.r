@@ -66,7 +66,11 @@ colours), a palette name (\code{\link[=kply_palettes]{kply_palettes()}}) or a fu
 Default: the theme palette.}
 
 \item{legend}{\code{"right"}, \code{"bottom"}, \code{"top"}, \code{"left"}, \code{"none"}/\code{FALSE},
-or \code{c(x, y)} to place it inside the panel (fractions of the panel).}
+or \code{c(x, y)} to place it inside the panel (fractions of the panel). At
+the top and the bottom the legend is horizontal: the widget reserves a
+margin for it, at most a quarter of the height of the figure, and a
+longer legend scrolls. With dozens of levels, prefer \code{"right"}, or
+colour by fewer levels.}
 
 \item{slider}{Whether to add a range slider under the x axis. By default
 \code{TRUE} for time series (\code{Date}/\code{POSIXct} \code{x}, \code{ts} input), \code{FALSE}
